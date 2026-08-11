@@ -7,12 +7,9 @@ workflows:
       - name: Unzip Project
         script: |
           unzip StokPenjualanOffline-Android.zip
-          ls -la
-      - name: Find build.gradle and Build
+      - name: Build APK
         script: |
-          PROJECT_DIR=$(find . -name "build.gradle" -path "*/app/*" | head -1 | xargs dirname | xargs dirname)
-          echo "Project found in: $PROJECT_DIR"
-          cd "$PROJECT_DIR"
+          cd StokPenjualanOffline
           gradle assembleDebug
     artifacts:
-      - '**/app/build/outputs/apk/debug/*.apk'
+      - StokPenjualanOffline/app/build/outputs/apk/debug/*.apk
