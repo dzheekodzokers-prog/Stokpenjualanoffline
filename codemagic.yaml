@@ -1,18 +1,12 @@
 workflows:
   android-build:
-    name: Build APK Android
-    instance_type: mac_mini_m2
+    name: Build APK
     environment:
       java: 17
     scripts:
-      - name: Unzip and Find Folder
-        script: |
-          unzip StokPenjualanOffline-Android.zip
-          ls -la
-          PROJECT_DIR=$(find . -type d -name "app" | sed 's|/app||' | head -1)
-          echo "Found project in: $PROJECT_DIR"
-          cd "$PROJECT_DIR"
-          pwd
-          gradle assembleDebug --stacktrace
+      - unzip StokPenjualanOffline-Android.zip
+      - cd $(find . -type d -name "app" | head -1 | xargs dirname)
+      - pwd
+      - gradle assembleDebug --stacktrace
     artifacts:
       - '**/app/build/outputs/apk/debug/*.apk'
