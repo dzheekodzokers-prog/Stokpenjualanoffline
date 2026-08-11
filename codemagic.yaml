@@ -5,7 +5,12 @@ workflows:
       java: 17
     scripts:
       - unzip StokPenjualanOffline-Android.zip
-      - cd $(find . -type d -name "app" | head -1 | xargs dirname)
+      - echo "=== ISI FOLDER SETELAH UNZIP ==="
+      - ls -R
+      - echo "=== CARI FOLDER YG ADA BUILD.GRADLE.KTS ==="
+      - PROJECT_DIR=$(find . -name "build.gradle.kts" | head -1 | xargs dirname)
+      - echo "Masuk ke: $PROJECT_DIR"
+      - cd "$PROJECT_DIR"
       - pwd
       - gradle assembleDebug --stacktrace
     artifacts:
