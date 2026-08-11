@@ -8,4 +8,5 @@ workflows:
         script: unzip StokPenjualanOffline-Android.zip
       - name: List All Files
         script: find . -type f | sort
-    artifacts: []
+    artifacts:
+      - 'codemagic.yaml'  # ini cuma biar gak error
