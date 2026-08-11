@@ -1,12 +1,15 @@
 workflows:
   android-build:
-    name: Cek Isi Zip
+    name: Build APK Android
     environment:
       java: 17
     scripts:
       - name: Unzip Project
         script: unzip StokPenjualanOffline-Android.zip
-      - name: List All Files
-        script: find . -type f | sort
+      - name: Build APK
+        script: |
+          cd StokPenjualanOffline
+          pwd
+          gradle assembleDebug --stacktrace
     artifacts:
-      - 'codemagic.yaml'  # ini cuma biar gak error
+      - 'StokPenjualanOffline/app/build/outputs/apk/debug/*.apk'
