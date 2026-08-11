@@ -7,12 +7,16 @@ workflows:
       - name: Unzip Project
         script: |
           unzip StokPenjualanOffline-Android.zip
-          cd StokPenjualanOffline-Android
+          ls -la
+      - name: Find Project Folder
+        script: |
+          cd $(find . -maxdepth 1 -type d -name "*StokPenjualan*" | head -1)
+          pwd
           ls -la
       - name: Build APK
         script: |
-          cd StokPenjualanOffline-Android
+          cd $(find . -maxdepth 1 -type d -name "*StokPenjualan*" | head -1)
           chmod +x gradlew
           ./gradlew assembleDebug
     artifacts:
-      - StokPenjualanOffline-Android/app/build/outputs/apk/debug/*.apk
+      - '**/app/build/outputs/apk/debug/*.apk'
