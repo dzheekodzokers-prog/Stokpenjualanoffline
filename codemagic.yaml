@@ -6,13 +6,13 @@ workflows:
     scripts:
       - name: Unzip Project
         script: |
-          unzip StokPenjualanOffline-Android.zip -d project
-          cd project
+          unzip StokPenjualanOffline-Android.zip
+          cd StokPenjualanOffline-Android
           ls -la
       - name: Build APK
         script: |
-          cd project
+          cd StokPenjualanOffline-Android
           chmod +x gradlew
           ./gradlew assembleDebug
     artifacts:
-      - project/app/build/outputs/apk/debug/*.apk
+      - StokPenjualanOffline-Android/app/build/outputs/apk/debug/*.apk
