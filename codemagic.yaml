@@ -3,9 +3,6 @@ workflows:
     name: Build APK Android
     instance_type: mac_mini_m2
     max_build_duration: 60
-    environment:
-      groups:
-        - google_credentials
     scripts:
       - name: Unzip Project
         script: |
@@ -15,10 +12,7 @@ workflows:
       - name: Build APK
         script: |
           cd project
+          chmod +x gradlew
           ./gradlew assembleDebug
     artifacts:
       - project/app/build/outputs/apk/debug/*.apk
-    publishing:
-      email:
-        recipients:
-          - dzheekodzokers-prog
