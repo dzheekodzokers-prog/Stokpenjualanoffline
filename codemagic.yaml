@@ -4,14 +4,16 @@ workflows:
     environment:
       java: 17
     scripts:
-      - unzip StokPenjualanOffline-Android.zip
-      - echo "=== ISI FOLDER SETELAH UNZIP ==="
-      - ls -R
-      - echo "=== CARI FOLDER YG ADA BUILD.GRADLE.KTS ==="
-      - PROJECT_DIR=$(find . -name "build.gradle.kts" | head -1 | xargs dirname)
-      - echo "Masuk ke: $PROJECT_DIR"
-      - cd "$PROJECT_DIR"
-      - pwd
-      - gradle assembleDebug --stacktrace
+      - name: Unzip Project
+        script: unzip StokPenjualanOffline-Android.zip
+      - name: List Files
+        script: ls -R
+      - name: Find Project Folder
+        script: |
+          PROJECT_DIR=$(find . -name "build.gradle.kts" | head -1 | xargs dirname)
+          echo "Found project in: $PROJECT_DIR"
+          cd "$PROJECT_DIR"
+          pwd
+          gradle assembleDebug --stacktrace
     artifacts:
       - '**/app/build/outputs/apk/debug/*.apk'
